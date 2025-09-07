@@ -7,6 +7,9 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from datetime import datetime
 import os
 from werkzeug.utils import secure_filename
+from flask_socketio import SocketIO, emit
+
+
 
 # APP INITIALIZATION
 
@@ -20,6 +23,10 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 bcrypt = Bcrypt(app)
+
+socketio = SocketIO()
+
+socketio.init_app(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -53,6 +60,19 @@ class Posts(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
 # SOCKETS
+
+@socketio.on('connect')
+def handle_connect():
+    print('Connected Socket')
+
+@socketio.on('user_join')
+def handle_user_join(username):
+    print(f"User {username} Joined!")
+
+@socketio.on('new_message')
+def handle_new_message(message):
+    print(f'New Message: {message}')
+    emit('chat', {"message": message}, broadcast=True)
 
 # ROUTES
 
@@ -209,12 +229,7 @@ def user():
         flash("Profile Updated Successfully", 'success')
         return redirect(url_for('user'))
 
-
-
-
-
-
 # RUN
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app, debug=True)

@@ -695,3 +695,44 @@
     background-color: red;
     color: white;
 }
+
+.chatareaCon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    width: 100%;
+}
+
+.chatarea {
+    height: 650px;
+    width: 1000px;
+    background-color: gray;
+    display: flex;
+    align-items: flex-start;
+    border-radius: 30px;
+    justify-content: flex-start;
+}
+
+.messagebox {
+    width: 100%;
+    height: 30px;
+    border: 1px solid black;
+    outline: none;
+    margin-bottom: -50px;
+    border-radius: 5px;
+}
+
+.sendform {
+    position: absolute;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-bottom: 300px;
+    flex-direction: column;
+}
+
+.sendmsg {
+    
+}

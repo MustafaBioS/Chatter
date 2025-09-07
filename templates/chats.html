@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chats</title>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
@@ -34,13 +35,54 @@
         {% endif %}
     {% endwith %}
 
+    <div class="chatareaCon">
+        <div class="chatarea">
+            <ul class="msgs">
+
+            </ul>
+        </div>
+        <form class="sendform">
+                <span class="msgspn">
+                    <input class="messagebox" type="text">
+                    <input type="button" class="sendmsg" value="Send Message">
+                </span>
+        </form>
+    </div>
+
 <script>
     const signup = document.querySelector('.signup');
     const login = document.querySelector('.login');
     const logout = document.querySelector('.logout');
     const pfp = document.querySelector('.pfp');
+    const socket = io({autoConnect: false});
+    const sendmsg = document.querySelector('.sendmsg');
+    const sendform = document.querySelector('.sendform')
+
+    let username = '{{ current_user.username }}';
+
+    socket.connect();
+
+    socket.on('connect', ()=> {
+        socket.emit("user_join", username);
+    })
+
+    document.querySelector('.sendmsg').addEventListener('click', ()=> {
+            let message = document.querySelector('.messagebox').value;
+            socket.emit('new_message', message);
+            document.querySelector('.messagebox').value = '';
+        }
+    )
+
+    socket.on('chat', (data)=> {
+        let ul = document.querySelector('.msgs');
+        let li = document.createElement('li');
+        li.appendChild(document.createTextNode(data["message"]))
+        ul.appendChild(li);
+        ul.scrollTop = ul.scrollHeight
+    })
 
     document.addEventListener('DOMContentLoaded', ()=> {
+
 
         if (login) {
             login.addEventListener('click', ()=> {
