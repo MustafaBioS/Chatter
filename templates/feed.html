@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed</title>
+    <link rel='stylesheet' href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <a class="navitem" href="{{ url_for('home') }}">Home</a>
+        <a class="navitem" href="{{ url_for('chats') }}">Chats</a>
+        <a class="navitem" href="{{ url_for('feed') }}">Posts</a>
+        <div class="navbtncon">
+            {% if current_user.is_authenticated %}
+                <h1 class="usernametxt">{{ current_user.username }}</h1>
+                <img src="{{ current_user.pfp }}" alt="Profile Picture" class="pfp">
+            {% else %}
+                <button class="signup btn">Sign Up</button>
+                <button class="login btn">Log In</button>
+            {% endif %}
+        </div>
+    </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="feedflashCon">
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="newpostCon">
+        <button class="btn newpost">New Post</button>
+    </div>
+
+    <div class="feedCon">
+        {% for post in posts %}
+            <div class="feedborder">
+                <div class="pfpleft">
+                    <img src='{{ post.author.pfp }}' alt="Profile Picture" class="authorpfp">
+                    <h1 class="authorname">{{ post.author.username }}</h1>
+                </div>
+                <div class="centertitle">
+                    <h1 class="authorposttitle">{{ post.title }}</h1>
+                </div>
+                <p class="authorpostcontent">{{ post.content}}</p>
+
+            </div>
+        {% endfor %}
+    </div>
+    
+
+    <script>
+        const signup = document.querySelector('.signup');
+        const login = document.querySelector('.login');
+        const logout = document.querySelector('.logout');
+        const pfp = document.querySelector('.pfp');
+        const newpostbtn = document.querySelector('.newpost')
+
+        document.addEventListener('DOMContentLoaded', ()=> {
+
+            if (newpostbtn) {
+                newpostbtn.addEventListener('click', ()=> {
+                    window.location.href = '{{ url_for("newpost", user_id=current_user.id) }}'
+                })
+            }
+
+            if (login) {
+                login.addEventListener('click', ()=> {
+                    window.location.href = '{{ url_for("login") }}'
+                })
+            }
+
+            if (signup) {
+                signup.addEventListener('click', ()=> {
+                    window.location.href = "{{ url_for('signup') }}"
+                })
+            }
+
+            if (logout) {
+                logout.addEventListener('click', ()=> {
+                    window.location.href = "{{ url_for('logout') }}"
+                })
+            }
+
+            if (pfp) {
+                pfp.addEventListener('click', ()=> {
+                    window.location.href = "{{ url_for('user', user_id=current_user.id) }}"
+                })
+            }
+
+        })
+
+    </script>
+</body>
+</html>

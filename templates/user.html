@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body style="overflow-x: hidden;">
+    <nav class="navbar">
+        <a class="navitem" href="{{ url_for('home') }}">Home</a>
+        <a class="navitem" href="{{ url_for('chats') }}">Chats</a>
+        <a class="navitem" href="{{ url_for('feed') }}">Posts</a>
+        <div class="navbtncon">
+            {% if current_user.is_authenticated %}
+                    <h1 class="usernametxt">{{ current_user.username }}</h1>
+                    <img src="{{ current_user.pfp }}" alt="Profile Picture" class="pfp">
+            {% else %}
+                <button class="sisgnup btn">Sign Up</button>
+                <button class="login btn">Log In</button>
+            {% endif %}
+        </div>
+    </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flashCon">
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="userCon">
+        <div class="changeCon">
+            <button class="option usernm chosen">Username</button>
+            <button class="option passwrd">Password</button>
+            <button class="option profilepic">Profile Picture</button>
+            <button class="option settings">Settings</button>
+        </div>
+        <div class="userbg">
+            <img src="{{ current_user.pfp }}" alt="Profile Picture" class="pic">
+            <h1 class="usernametxt usernamebg">{{ current_user.username }}</h1>
+            <form action="{{ url_for('user') }}" method="post" class="changenameform" enctype="multipart/form-data">
+                <h1 class="change">Change Username:</h1>
+                <input class="inp userinp" type="text" value="{{ current_user.username }}" name="newuser" placeholder="Change Username" required>
+                <input class="inp userinp userpass" type="text" name="userpass" placeholder="Password" required>
+                <input class="btn userbtn userchangebtn" type="submit" value="Change Username">
+            </form>
+            <form action="{{ url_for('user') }}" method="post" class="changepassform" enctype="multipart/form-data">
+                <h1 class="change changepass">Change Password</h1>
+                <input class="inp passinp userinp" type="text" placeholder="New Password" name="newpass" required>
+                <input class="inp repassinp userinp" type="text" placeholder="Old Password" name='oldpass' required>
+                <input class="btn passubmit userbtn" type="submit" value="Change Password">
+            </form>
+            <form action="{{ url_for('user') }}" method="post" class="changepfpform" enctype="multipart/form-data">
+                <h1 class="change changepfp">Change Profile Picture</h1>
+                <label for="upload" class="uploadlabel">
+                    📂 Choose File
+                </label>
+                <input class="upload" id='upload' type="file" name="pfpupload" accept="image" required>
+                <span id="filename"></span>
+                <input class="btn filesubmit userbtn" value="Change Profile Picture" type="submit">
+            </form> 
+            <div class="usersettings">
+                <h1 class="change changesettings">User Settings</h1>
+                <button class="logoutbtn btn">Logout</button>
+                <button class="deletebtn btn">Delete Account</button>
+                <div class="modalCon">
+                    <div class="modal">
+                    <form action="{{ url_for('user') }}" method="post" class="bg modalform">
+                        <h1 style="position: absolute; margin-bottom: 350px; color: white;">Delete Account</h1>
+                        <div class="showcon">
+                            <input class="inp password" type="password" name="password" placeholder="Password" src="../static/show.png" required>
+                            <img class="showbtn" src="../static/show.png"></img>
+                        </div>
+                        <div class="showcon2">
+                            <input class="inp repassword" type="password" name="repassword" placeholder="Confirm Password" src="../static/show.png" required>
+                            <img class="showbtn2" src="../static/show.png"></img>
+                        </div>
+                        <input class="submit btn deletebtn2" type="submit" value="Delete Account">
+                    </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <script>
+        const signup = document.querySelector('.signup');
+        const login = document.querySelector('.login');
+        const logout = document.querySelector('.logoutbtn');
+        const deletebtn = document.querySelector('.deletebtn');
+        const pfp = document.querySelector('.pfp');
+        const changenameform = document.querySelector('.changenameform');
+        const userbtn = document.querySelector('.usernm');
+        const changepassform = document.querySelector('.changepassform');
+        const passbtn = document.querySelector('.passwrd');
+        const changepfpform = document.querySelector('.changepfpform');
+        const pfpbtn = document.querySelector('.profilepic');
+        const fileInput = document.getElementById('upload');
+        const fileNameSpan = document.getElementById('filename');
+        const settingsform = document.querySelector('.usersettings')
+        const settings = document.querySelector('.settings');
+        const password = document.querySelector('.password');
+        const repassword = document.querySelector('.repassword');
+        const showbtn = document.querySelector('.showbtn');
+        const showbtn2 = document.querySelector('.showbtn2');
+        const modal = document.querySelector('.modalCon');
+
+        document.addEventListener('DOMContentLoaded', ()=> {
+
+
+            if (repassword) {
+                repassword.addEventListener('input', ()=> {
+                    if (repassword.value === '') {
+                        showbtn2.style.display = 'none';
+                    } else {
+                        showbtn2.style.display = 'block';
+                    }
+
+                    })
+            };
+
+            if (password) {
+            password.addEventListener('input', ()=> {
+                if (password.value === '') {
+                    showbtn.style.display = 'none';
+                } else {
+                    showbtn.style.display = 'block';
+                }
+
+                })
+            };
+
+            if (showbtn) {
+                showbtn.addEventListener('click', ()=> {
+                if (password.type === 'password') {
+                        password.type = 'text';
+                        showbtn.src = '../static/hide.png';
+                } else {
+                    password.type = 'password';
+                    showbtn.src = '../static/show.png';
+                } 
+                })
+            }
+
+            if (showbtn2) {
+                showbtn2.addEventListener('click', ()=> {
+                if (repassword.type === 'password') {
+                        repassword.type = 'text';
+                        showbtn2.src = '../static/hide.png';
+                } else {
+                    rpassword.type = 'password';
+                    showbtn2.src = '../static/show.png';
+                } 
+                })
+            }
+
+
+            if (deletebtn) {
+                deletebtn.addEventListener('click', ()=> {
+                    modal.style.display = 'flex';
+                })
+            }
+
+            window.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.style.display = "none";
+            }
+            });
+
+            if (logout) {
+                logout.addEventListener('click', ()=> {
+                    window.location.href = '{{ url_for("logout") }}'
+                })
+            };
+
+            if (settings) {
+                settings.addEventListener('click', ()=> {
+                    settingsform.style.display = 'flex';
+                    changenameform.style.display = 'none';
+                    changepassform.style.display = 'none';
+                    changepfpform.style.display = 'none';
+                    settings.classList.add('chosen');
+                    userbtn.classList.remove('chosen');
+                    passbtn.classList.remove('chosen');
+                    pfpbtn.classList.remove('chosen');
+                })
+            }
+
+            if (userbtn) {
+                userbtn.addEventListener('click', ()=> {
+                    changenameform.style.display = 'flex';
+                    changepassform.style.display = 'none';
+                    changepfpform.style.display = 'none';
+                    settingsform.style.display = 'none';
+                    userbtn.classList.add('chosen');
+                    passbtn.classList.remove('chosen');
+                    pfpbtn.classList.remove('chosen');
+                    settings.classList.remove('chosen');
+                })
+            }
+
+            if (passbtn) {
+                passbtn.addEventListener('click', ()=> {
+                    changepassform.style.display = 'flex';
+                    changenameform.style.display = 'none';
+                    changepfpform.style.display = 'none';
+                    settingsform.style.display = 'none';
+                    passbtn.classList.add('chosen');
+                    userbtn.classList.remove('chosen');
+                    pfpbtn.classList.remove('chosen');
+                    settings.classList.remove('chosen');
+                })
+            }
+
+            if (pfpbtn) {
+                pfpbtn.addEventListener('click', ()=> {
+                    changepfpform.style.display = 'flex';
+                    changenameform.style.display = 'none';
+                    changepassform.style.display = 'none';
+                    settingsform.style.display = 'none';
+                    pfpbtn.classList.add('chosen')
+                    userbtn.classList.remove('chosen')
+                    passbtn.classList.remove('chosen')
+                    settings.classList.remove('chosen')
+                })
+            }
+
+            if (login) {
+                login.addEventListener('click', ()=> {
+                    window.location.href = '{{ url_for("login") }}'
+                })
+            }
+
+            if (signup) {
+                signup.addEventListener('click', ()=> {
+                    window.location.href = "{{ url_for('signup') }}"
+                })
+            }
+
+            if (pfp) {
+                pfp.addEventListener('click', ()=> {
+                    window.location.href = "{{ url_for('user') }}"
+                })
+            }
+
+            if (fileInput) {
+
+                fileInput.addEventListener('change', () => {
+                    if (fileInput.files.length > 0) {
+                        fileNameSpan.textContent = fileInput.files[0].name;
+                    } else {
+                        fileNameSpan.textContent = "No file chosen";
+                    }
+                });
+            }
+
+
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <nav class="navbar nbabs">
+        <a class="navitem" href="{{ url_for('home') }}">Home</a>
+        <a class="navitem" href="{{ url_for('chats') }}">Chats</a>
+        <a class="navitem" href="{{ url_for('feed') }}">Posts</a>
+        <div class="navbtncon">
+            {% if current_user.is_authenticated %}
+                <h1 class="usernametxt">{{ current_user.username }}</h1>
+                <img src="{{ current_user.pfp }}" alt="Profile Picture" class="pfp">
+            {% else %}
+                <button class="signup btn">Sign Up</button>
+                <button class="login btn">Log In</button>
+            {% endif %}
+        </div>
+    </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flashCon">
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="center">
+        <div class="bg">
+            <h1 class="bgtitle">Login</h1>
+            <form action="#" method="post" class="bg formbg">
+                <input class="inp username" type="text" name="username" placeholder="Username" required>
+                <div class="showcon">
+                    <input class="inp password" type="password" name="password" placeholder="Password" src="../static/show.png" required>
+                    <img class="showbtn" src="../static/show.png"></img>
+                </div>
+                <input class="submit btn" type="submit" value="Log In">
+            </form>
+            <span class="spn">No Account? <a href='{{  url_for("signup") }}' class="anchor">Sign Up</a></span>
+        </div>
+    </div>
+
+
+    <script>
+
+        const password = document.querySelector('.password');
+        const showbtn = document.querySelector('.showbtn');
+        const signup = document.querySelector('.signup');
+        const login = document.querySelector('.login');
+        const logout = document.querySelector('.logout');
+        const pfp = document.querySelector('.pfp');
+
+        document.addEventListener('DOMContentLoaded', ()=> {
+
+
+        if (password) {
+        password.addEventListener('input', ()=> {
+            if (password.value === '') {
+                showbtn.style.display = 'none';
+            } else {
+                showbtn.style.display = 'block';
+            }
+
+            })
+        };
+
+        if (showbtn) {
+            showbtn.addEventListener('click', ()=> {
+               if (password.type === 'password') {
+                    password.type = 'text';
+                    showbtn.src = '../static/hide.png';
+               } else {
+                password.type = 'password';
+                showbtn.src = '../static/show.png';
+               } 
+            })
+        }
+
+        if (login) {
+            login.addEventListener('click', ()=> {
+                window.location.href = '{{ url_for("login") }}'
+            })
+        }
+
+        if (signup) {
+            signup.addEventListener('click', ()=> {
+                window.location.href = "{{ url_for('signup') }}"
+            })
+        }
+
+
+        }) 
+
+        if (logout) {
+            logout.addEventListener('click', ()=> {
+                window.location.href = "{{ url_for('logout') }}"
+            })
+        }
+
+        if (pfp) {
+            pfp.addEventListener('click', ()=> {
+                window.location.href = "{{ url_for('user') }}"
+            })
+        }
+
+
+
+    </script>
+</body>
+</html>

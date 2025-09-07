@@ -1,0 +1,697 @@
+    body {
+    margin: 0;
+    padding: 0;
+    font-family: "Arial";
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.navbar {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    background-color: lightblue;
+
+}
+
+.navitem {
+    text-decoration: none;
+    color: white;
+    font-size: 30px;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.navbtncon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    position: absolute;
+    margin-right: 75px;
+    gap: 15px;
+}
+
+.btn {
+    height: 40px;
+    width: 150px;
+    font-size: 20px;
+    border-radius: 30px;
+    outline: none;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-8px);
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    box-shadow: 2px 2px 50px rgba(255, 255, 255, 0.7);
+}
+
+.navitem:hover {
+    cursor: pointer;
+    transform: translateY(-8px);
+    text-decoration: underline;
+    color: black;
+}
+
+.bghome {
+ height: 100%;
+ width: 100%;
+ display: flex;
+ align-items: center;
+ justify-content: center; 
+ font-size: 40px;
+ flex-direction: column;
+}
+
+.bdiv {
+    height: 400px;
+    width: 650px;
+    background-color: maroon;
+    border-radius: 40px;
+    box-shadow: 2px 2px 70px rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    margin-top: 25px;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.desc {
+    width: 90%;
+    text-align: center;
+    color: white;
+    font-size: 40px;
+}
+
+.bdiv:hover {
+    transform: translateY(-8px);
+    box-shadow: 2px 2px 50px rgba(0, 0, 0, 0.7);
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.bg {
+    height: 600px;
+    width: 400px;
+    background-color: maroon;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin-top: 100px;
+    gap: 15px;
+}
+
+.bgtitle {
+    font-size: 60px;
+    margin-bottom: 400px;
+    text-align: center;
+    color: black;
+    position: absolute;
+}
+
+.username {
+    margin-top: 125px;
+}
+
+.inp {
+    height: 30px;
+    width: 225px;
+    padding-left: 20px;
+    border-radius: 30px;
+    outline: none;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.inp:focus {
+    transform: translateY(-6px);
+    box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.7);
+    background-color: rgb(248, 49, 49);
+    color: white;
+}
+
+.inp::placeholder {
+    color: black;
+}
+
+.inp:focus::placeholder {
+    color: white;
+}
+
+.submit {
+    margin-top: 50px;
+}
+
+.spn {
+    margin-bottom: 100px;
+    color: white;
+}
+
+.anchor {
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.anchor:hover {
+    color: black;
+}
+
+.showcon {
+    position: relative;
+    width: 180px;
+    margin-right: 60px;
+}
+
+.password {
+    width: 100%;
+    padding: 10px 35px 10px 10px;
+    width: 190px;
+    height: 10px;
+    padding-left: 20px;
+}
+
+.showbtn {
+    position: absolute;
+    left: 200px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    display: none;
+    transition: all 0.3s ease;
+}
+
+.password:focus + .showbtn {
+    transform: translateY(calc(-50% - 8px));
+    color: white;
+}
+
+.signup {
+    z-index: 5;
+}
+
+.login {
+    z-index: 5;
+}
+
+.nbabs {
+    position: absolute;
+}
+
+.logout {
+    margin-right: 50px;
+}
+
+.pfp {
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 50px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.usernametxt {
+    color: white;
+    font-size: 25px;
+}
+
+.userCon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 25px;
+}
+
+.userbg {
+    height: 600px;
+    width: 900px;
+    background-color: rgb(221, 212, 212);
+    border-radius: 30px;
+    margin-top: 100px;
+}
+
+.pic {
+    height: 150px;
+    margin: 50px;
+    border-radius: 25px;
+    position: absolute;
+    border: 1px solid black;
+}
+
+.usernamebg {
+    color: black;
+    font-size: 40px;
+    margin-left: 250px;
+    margin-top: 100px;
+}
+
+.changenameform {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40%;
+    width: 100%;
+    flex-direction: column;
+}
+
+.change {
+    font-size: 25px;
+    z-index: 2;
+    margin-bottom: 225px;
+}
+
+.userinp {
+    position: absolute;
+}
+
+.userpass {
+    margin-top: 100px;
+}
+
+.userbtn {
+    position: absolute;
+    margin-top: 250px;
+    font-size: 15px;
+}
+
+.changepassform {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    height: 40%;
+    width: 100%;
+    flex-direction: column;
+}
+
+.changepass {
+    font-size: 25px;
+    z-index: 2;
+    margin-bottom: 225px;
+}
+
+.passinp {
+    position: absolute;
+}
+
+.repassinp {
+    margin-top: 100px;
+}
+
+.passubmit {
+    margin-top: 250px;
+}
+
+.changeCon {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    position: absolute;
+    margin-left: 100px;
+    gap: 30px;
+}
+
+.changepfpform {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    height: 40%;
+    width: 100%;
+    flex-direction: column;
+}
+
+.usersettings {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.changesettings {
+    position: absolute;
+    font-size: 25px;
+    z-index: 2;
+    margin-bottom: 575px;
+}
+
+.logoutbtn {
+    z-index: 0;
+    margin-bottom: 250px;
+}
+
+.deletebtn {
+    z-index: 0;
+    transition: all 0.3s ease;
+    font-size: 18px;
+    margin-bottom: 250px;
+}
+
+.deletebtn:hover {
+    background-color: rgb(109, 40, 40);
+    color: white;
+}
+
+.option {
+    height: 50px;
+    width: 200px;
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid black;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.option:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    transform: translateY(-8px);
+}
+
+.chosen {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.upload {
+    display: none;
+}
+
+.filesubmit {
+    width: 200px;
+    font-size: 17px;
+}
+
+.uploadlabel {
+    position: absolute;
+    font-size: 20px;
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    background: maroon;
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.uploadlabel:hover {
+    background: #357abd;
+    transform: translateY(-8px);
+}
+
+#filename {
+    z-index: 500;
+    margin-top: 125px;
+    position: absolute;
+    font-size: 20px;
+}
+
+.newpostCon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 60px;
+    position: absolute;
+    z-index: 600;
+}
+
+.feedCon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    position: absolute;
+    margin-top: 50px;
+    gap: 30px;
+    height: 100%;
+    width: 100%;
+}
+
+.contain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 70px;
+    flex-direction: column;
+}
+
+.posttitle {
+    width: 1000px;
+    height: 40px;
+    text-align: center;
+    font-size: 25px;
+    outline: none;
+    border-bottom: 3px solid black;
+}
+
+.postcontent {
+    resize: none;
+    height: 455px;
+    width: 955px;
+    outline: none;
+    border: none;
+    font-size: 25px;
+    padding: 25px;
+    overflow-y: auto;
+}
+
+.posttitle::placeholder {
+    color: black;
+}
+
+.postcontent::placeholder {
+    color: black;
+}
+
+.border {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 5px solid black;
+    border-radius: 50px;
+    overflow-y: auto;
+    margin-top: 50px;
+}
+
+.sharepost {
+    margin-bottom: 625px;
+    position: absolute;
+}
+
+.feedborder {
+   display: flex;
+   align-items: flex-start;
+   justify-content: flex-start;
+   flex-direction: column;
+   border: 3px solid black;
+   min-height: 500px;
+   width: 600px;
+   border-radius: 30px;
+}
+
+.pfpleft {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 30%;
+    position: absolute;
+    gap: 20px;
+}
+
+.authorpfp {
+    height: 40px;
+    margin-top: 17px;
+    margin-left: 20px;
+    border-radius: 50%;
+    border: 1px solid black;  
+}
+
+.authorname {
+    font-size: 20px;
+    margin-top: 27px;
+}
+
+.leftpost {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 30%;
+    height: 25%;
+}
+
+.centertitle {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+}
+
+.authorposttitle {
+    margin-top: 65px;
+    font-size: 24px;
+    width: 90%;
+    text-align: center;
+    border-bottom: 3px solid black;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.authorpostcontent {
+    font-size: 25px;
+    width: 95%;
+    margin-left: 25px;
+    white-space: normal;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.allposts {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.modalCon {
+    position: absolute;
+    height: 150%;
+    width: 100%;
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100090909012034812083012830103800000;
+    display: none;
+}
+
+.modal {
+    background-color: maroon;
+    height: 400px;
+    width: 800px;
+    position: fixed;
+    margin-bottom: 250px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.modal:hover {
+    transform: translateY(-8px);
+    box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.7);
+}
+
+.modalform {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    margin-bottom: 150px;
+}
+
+.deletebtn2 {
+    z-index: 0;
+    transition: all 0.3s ease;
+    font-size: 18px;
+    height: 40px;
+    position: absolute;
+    margin-top: 200px;
+}
+
+.showcon2 {
+    position: relative;
+    width: 180px;
+    margin-right: 60px;
+}
+
+.repassword {
+    width: 100%;
+    padding: 10px 35px 10px 10px;
+    width: 190px;
+    height: 10px;
+    padding-left: 20px;
+}
+
+.showbtn2 {
+    position: absolute;
+    left: 200px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    display: none;
+    transition: all 0.3s ease;
+}
+
+.repassword:focus + .showbtn2 {
+    transform: translateY(calc(-50% - 8px));
+    color: white;
+}
+
+.flashCon {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    height: 90%;
+    width: 100%;
+    position: absolute;
+}
+
+.feedflashCon {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.flash {
+    padding: 20px;
+    border-radius: 30px;
+    margin: 25px;
+    font-size: 20px;
+}
+
+.success {
+    background-color: green;
+    color: white;
+}
+
+.fail {
+    background-color: red;
+    color: white;
+}
