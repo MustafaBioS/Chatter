@@ -45,13 +45,6 @@ class Users(db.Model, UserMixin):
 def load_user(user_id):
     return Users.query.get(int(user_id))
 
-class Messages(db.Model):
-    mid = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.Text, nullable=False)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
-
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(64), nullable=False)
@@ -65,14 +58,9 @@ class Posts(db.Model):
 def handle_connect():
     print('Connected Socket')
 
-@socketio.on('user_join')
-def handle_user_join(username):
-    print(f"User {username} Joined!")
-
 @socketio.on('new_message')
 def handle_new_message(message):
-    print(f'New Message: {message}')
-    emit('chat', {"message": message}, broadcast=True)
+    emit('chat', {'sender': current_user.username, "message": message}, broadcast=True)
 
 # ROUTES
 
@@ -140,7 +128,8 @@ def delete():
 @app.route('/chats')
 @login_required
 def chats():
-    return render_template('chats.html')
+    users = Users.query.filter(Users.id != current_user.id).all() 
+    return render_template('chats.html', users=users)
 
 @app.route('/feed')
 @login_required

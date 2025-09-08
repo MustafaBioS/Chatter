@@ -705,22 +705,54 @@
 }
 
 .chatarea {
-    height: 650px;
+    height: 630px;
     width: 1000px;
-    background-color: gray;
+    background-color: rgb(75, 62, 62);
     display: flex;
     align-items: flex-start;
     border-radius: 30px;
     justify-content: flex-start;
+    position: absolute;
+    overflow-y: auto;
+}
+
+.showmsgcon {
+    margin-top: 650px;
 }
 
 .messagebox {
-    width: 100%;
-    height: 30px;
-    border: 1px solid black;
+    width: 943px;
+    margin-left: -380px;
+    height: 15px;
     outline: none;
-    margin-bottom: -50px;
+    margin-bottom: 27px;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border: 2px solid black;
+    font-size: 16px;
+    background-color: rgb(165, 155, 155);
+    color: white;
+}
+
+.messagebox:focus {
+    transform: translateY(0px);
+    background-color: rgb(165, 155, 155);
+}
+
+.showmsgbtn {
+    margin-top: -13px;
+    height: 30px;
+    width: 30px;
+    margin-left: 360px;
+}
+
+.messagebox:focus + .showmsgbtn {
+    transform: translateY(-15px);
+    color: white;
 }
 
 .sendform {
@@ -733,6 +765,8 @@
     flex-direction: column;
 }
 
-.sendmsg {
-    
+.msgs {
+    list-style: none;
+    font-size: 20px;
+    color: white;
 }

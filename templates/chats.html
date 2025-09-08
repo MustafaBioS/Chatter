@@ -38,15 +38,13 @@
     <div class="chatareaCon">
         <div class="chatarea">
             <ul class="msgs">
-
             </ul>
         </div>
-        <form class="sendform">
-                <span class="msgspn">
-                    <input class="messagebox" type="text">
-                    <input type="button" class="sendmsg" value="Send Message">
-                </span>
-        </form>
+
+            <div class="showcon showmsgcon">
+                <input class="inp password messagebox" type="text" placeholder="Enter Your Message" src="../static/6493779-200.png" required>
+                <img class="showbtn showmsgbtn" src="../static/6493779-200.png"></img>
+            </div>
     </div>
 
 <script>
@@ -57,8 +55,9 @@
     const socket = io({autoConnect: false});
     const sendmsg = document.querySelector('.sendmsg');
     const sendform = document.querySelector('.sendform')
-
-    let username = '{{ current_user.username }}';
+    const messagebox = document.querySelector('.messagebox');
+    const password = document.querySelector('.password');
+    const showbtn = document.querySelector('.showbtn');
 
     socket.connect();
 
@@ -66,23 +65,44 @@
         socket.emit("user_join", username);
     })
 
-    document.querySelector('.sendmsg').addEventListener('click', ()=> {
-            let message = document.querySelector('.messagebox').value;
+    showbtn.addEventListener('click', ()=> {
+            let message = messagebox.value;
             socket.emit('new_message', message);
-            document.querySelector('.messagebox').value = '';
+            messagebox.value = '';
+            showbtn.style.display = 'none';
         }
     )
+
+    messagebox.addEventListener('keyup', (event)=> {
+        if (event.key == 'Enter') {
+            let message = messagebox.value;
+            socket.emit('new_message', message);
+            messagebox.value = '';
+            showbtn.style.display = 'none';
+        }
+    })
 
     socket.on('chat', (data)=> {
         let ul = document.querySelector('.msgs');
         let li = document.createElement('li');
-        li.appendChild(document.createTextNode(data["message"]))
+        li.appendChild(document.createTextNode(`${data.sender}: ${data.message}`))
         ul.appendChild(li);
         ul.scrollTop = ul.scrollHeight
     })
 
     document.addEventListener('DOMContentLoaded', ()=> {
 
+
+        if (password) {
+        password.addEventListener('input', ()=> {
+            if (password.value === '') {
+                showbtn.style.display = 'none';
+            } else {
+                showbtn.style.display = 'block';
+            }
+
+            })
+        };
 
         if (login) {
             login.addEventListener('click', ()=> {
