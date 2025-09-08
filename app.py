@@ -8,7 +8,7 @@ from datetime import datetime
 import os
 from werkzeug.utils import secure_filename
 from flask_socketio import SocketIO, emit
-
+import os
 
 
 # APP INITIALIZATION
@@ -24,7 +24,7 @@ migrate = Migrate(app, db)
 
 bcrypt = Bcrypt(app)
 
-socketio = SocketIO()
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 socketio.init_app(app)
 
@@ -220,5 +220,7 @@ def user():
 
 # RUN
 
+PORT = int(os.environ.get("PORT", 8080))
+
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app, host="0.0.0.0", port=PORT)
