@@ -129,7 +129,9 @@ def delete():
 @login_required
 def chats():
     users = Users.query.filter(Users.id != current_user.id).all() 
+    return "TESTING"
     return render_template('chats.html', users=users)
+    
 
 @app.route('/feed')
 @login_required
