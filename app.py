@@ -1,7 +1,3 @@
-import eventlet
-import eventlet.wsgi
-eventlet.monkey_patch()
-
 from flask import Flask, render_template, request, url_for, flash, redirect, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc
@@ -29,7 +25,7 @@ migrate = Migrate(app, db)
 
 bcrypt = Bcrypt(app)
 
-socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode='threading')
 
 socketio.init_app(app)
 
