@@ -2,7 +2,7 @@ import eventlet
 import eventlet.wsgi
 eventlet.monkey_patch()
 
-from flask import Flask, render_template, request, url_for, flash, redirectfrom, send_from_directory
+from flask import Flask, render_template, request, url_for, flash, redirect, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc
 from flask_migrate import Migrate
