@@ -1,3 +1,5 @@
+import eventlet
+import eventlet.wsgi
 from flask import Flask, render_template, request, url_for, flash, redirect
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc
@@ -12,6 +14,8 @@ import os
 
 
 # APP INITIALIZATION
+
+eventlet.monkey_patch()
 
 app = Flask(__name__)
 
