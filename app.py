@@ -2,7 +2,7 @@ import eventlet
 import eventlet.wsgi
 eventlet.monkey_patch()
 
-from flask import Flask, render_template, request, url_for, flash, redirect
+from flask import Flask, render_template, request, url_for, flash, redirectfrom, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc
 from flask_migrate import Migrate
@@ -68,6 +68,10 @@ def handle_new_message(message):
     emit('chat', {'sender': current_user.username, "message": message}, broadcast=True)
 
 # ROUTES
+
+@app.route('/static/<path:filename>')
+def static_files(filename):
+    return send_from_directory('static', filename)
 
 @app.route('/')
 def home():
